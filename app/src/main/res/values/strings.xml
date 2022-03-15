@@ -1,0 +1,14 @@
+<resources>
+  <string name="app_name">FirstComposeApp</string>
+
+
+  <!-- start MainActivity-->
+  <string name="main_post_btnMenu">View Menu</string>
+  <string name="main_commentLike">Like</string>
+  <string name="main_commentReply">Reply</string>
+  <string name="main_tf_share">Share your food experiences</string>
+  <!-- end MainActivity-->
+
+
+
+</resources>

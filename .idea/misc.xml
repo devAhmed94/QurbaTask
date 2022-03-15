@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/compose-model-1647040469844.xml" value="0.31165540540540543" />
+        <entry key="../../../../layout/compose-model-1647084805904.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1647120767902.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1647124899802.xml" value="0.31165540540540543" />
+        <entry key="../../../../layout/compose-model-1647162092431.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1647169715221.xml" value="0.1540551839464883" />
+        <entry key="../../../../layout/compose-model-1647169722592.xml" value="0.5" />
+        <entry key="../../../../layout/compose-model-1647170298838.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1647174119534.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1647200308679.xml" value="0.18888888888888888" />
+        <entry key="../../../../layout/compose-model-1647202707201.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1647295548417.xml" value="0.3861111111111111" />
+        <entry key="../../../../layout/compose-model-1647302752360.xml" value="0.2111111111111111" />
+        <entry key="../../../../layout/compose-model-1647303637149.xml" value="0.2111111111111111" />
+        <entry key="../../../../layout/compose-model-1647343572134.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1647343572179.xml" value="0.11203703703703703" />
+        <entry key="../../../../layout/compose-model-1647351883549.xml" value="0.3516483516483517" />
+        <entry key="../../../../layout/compose-model-1647351889078.xml" value="0.4888888888888889" />
+        <entry key="app/src/main/res/drawable/bg_btn_menu.xml" value="0.114" />
+        <entry key="app/src/main/res/drawable/ic_aa.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_arrow.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_bg_btnmenu.xml" value="0.191" />
+        <entry key="app/src/main/res/drawable/ic_cart.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_friend.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_friend_white.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_home.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_home_color.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_home_white.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_image.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.114" />
+        <entry key="app/src/main/res/drawable/ic_profile_white.xml" value="0.114" />
+        <entry key="app/src/main/res/drawable/ic_resturants.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_resturants_white.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_setting_white.xml" value="0.2085" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
