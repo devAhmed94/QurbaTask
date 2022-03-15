@@ -1,6 +1,7 @@
 package com.example.firstcomposeapp.presentation.home
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -8,6 +9,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,6 +26,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.clipRect
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -50,6 +53,7 @@ class MainActivity : ComponentActivity() {
 
   private val viewModel by viewModels<MainViewModel>()
   private val currentScreen = mutableStateOf<BottomBarRow>(BottomBarRow.Home)
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
@@ -165,7 +169,7 @@ class MainActivity : ComponentActivity() {
 
   @Composable
   fun TopAppBar() {
-
+    val context = LocalContext.current
     TopAppBar(
       title = {},
       Modifier.shadow(elevation = 7.dp, shape = RoundedCornerShape(bottomStart = 7.dp, bottomEnd = 7.dp)),
@@ -184,6 +188,11 @@ class MainActivity : ComponentActivity() {
           painterResource(id = R.drawable.ic_search),
           contentDescription = "search",
           Modifier.padding(end = 28.dp)
+            .clickable(onClick = {
+            Toast
+              .makeText(context, "search", Toast.LENGTH_SHORT)
+              .show()
+          })
 
         )
 
@@ -191,6 +200,11 @@ class MainActivity : ComponentActivity() {
           Image(
             painterResource(id = R.drawable.ic_notification),
             contentDescription = "logo",
+            Modifier.clickable(onClick = {
+              Toast
+                .makeText(context, "notification", Toast.LENGTH_SHORT)
+                .show()
+            })
           )
           Image(
             painterResource(id = R.drawable.ic_small_circle_notify),
@@ -202,7 +216,12 @@ class MainActivity : ComponentActivity() {
         Box(Modifier.padding(end = 15.dp)) {
           Image(
             painterResource(id = R.drawable.ic_cart),
-            contentDescription = "logo"
+            contentDescription = "logo",
+            Modifier.clickable(onClick = {
+              Toast
+                .makeText(context, "cart", Toast.LENGTH_SHORT)
+                .show()
+            })
           )
 
           Image(

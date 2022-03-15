@@ -167,18 +167,6 @@ fun PostCart(
 
           }
 
-          Spacer(modifier = Modifier.weight(1f))
-          Image(
-            painterResource(id = R.drawable.ic_policy),
-            contentDescription = null,
-            modifier = Modifier
-              .padding(top = 10.dp)
-              .clickable(onClick = {
-                Toast
-                  .makeText(context, "setting", Toast.LENGTH_SHORT)
-                  .show()
-              }),
-          )
         }
 
         Text(
@@ -473,7 +461,17 @@ fun PostCart(
             color = Color(R.color.hintColor),
             fontSize = 16.sp,
           )
-          Image(painterResource(id = R.drawable.ic_like), contentDescription = null)
+          Image(
+            painterResource(
+              id = R.drawable.ic_like
+            ),
+            contentDescription = null,
+            Modifier.clickable(onClick = {
+              Toast
+                .makeText(context, "like", Toast.LENGTH_SHORT)
+                .show()
+            })
+          )
         }
 
 
@@ -484,7 +482,15 @@ fun PostCart(
             color = Color(R.color.hintColor),
             fontSize = 16.sp,
           )
-          Image(painterResource(id = R.drawable.ic_reply), contentDescription = null)
+          Image(
+            painterResource(id = R.drawable.ic_reply),
+            contentDescription = null,
+            Modifier.clickable(onClick = {
+              Toast
+                .makeText(context, "comment", Toast.LENGTH_SHORT)
+                .show()
+            })
+          )
         }
 
 
@@ -496,7 +502,15 @@ fun PostCart(
             color = Color(R.color.hintColor),
             fontSize = 16.sp,
           )
-          Image(painterResource(id = R.drawable.ic_share), contentDescription = null)
+          Image(
+            painterResource(id = R.drawable.ic_share),
+            contentDescription = null,
+            Modifier.clickable(onClick = {
+              Toast
+                .makeText(context, "share", Toast.LENGTH_SHORT)
+                .show()
+            })
+          )
         }
       }
 
@@ -559,7 +573,13 @@ fun PostCart(
                 text = stringResource(R.string.main_commentLike),
                 fontSize = 12.sp,
                 color = Color(R.color.geyser),
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier
+                  .padding(horizontal = 16.dp)
+                  .clickable(onClick = {
+                    Toast
+                      .makeText(context, "comment", Toast.LENGTH_SHORT)
+                      .show()
+                  })
               )
 
 
