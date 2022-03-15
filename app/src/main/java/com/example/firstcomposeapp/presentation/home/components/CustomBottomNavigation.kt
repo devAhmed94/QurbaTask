@@ -24,10 +24,10 @@ import com.example.firstcomposeapp.R
 @Composable
 fun CustomBottomNavigation(
   screenCurrentId: String,
-  onItemSelected: (Screen) -> Unit
+  onItemSelected: (BottomBarRow) -> Unit
 ) {
 
-  val items = Screen.Items.list
+  val items = BottomBarRow.Items.list
 
   Row(
     modifier = Modifier
@@ -50,7 +50,7 @@ fun CustomBottomNavigation(
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CustomBottomNavigationItem(
-  item: Screen,
+  item: BottomBarRow,
   isSelected: Boolean,
   onClick: () -> Unit
 ) {
@@ -86,7 +86,7 @@ fun CustomBottomNavigationItem(
 @Composable
 @Preview
 fun Prev1() {
-  CustomBottomNavigation(screenCurrentId = Screen.Home.id) {
+  CustomBottomNavigation(screenCurrentId = BottomBarRow.Home.id) {
 
   }
 }
@@ -94,7 +94,7 @@ fun Prev1() {
 @Composable
 @Preview
 fun Prev2() {
-  CustomBottomNavigationItem(item = Screen.Home, isSelected = true) {
+  CustomBottomNavigationItem(item = BottomBarRow.Home, isSelected = true) {
 
   }
 }

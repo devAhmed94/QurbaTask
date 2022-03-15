@@ -4,19 +4,22 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -29,67 +32,133 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.firstcomposeapp.R
+import com.example.firstcomposeapp.presentation.home.components.BottomBarRow
 import com.example.firstcomposeapp.presentation.home.components.CustomBottomNavigation
 import com.example.firstcomposeapp.presentation.home.components.PostCart
-import com.example.firstcomposeapp.presentation.home.components.Screen
+import com.example.firstcomposeapp.presentation.home.components.Screens
 import com.example.firstcomposeapp.uitle.customStuff.AnimationShimmer
 import com.example.firstcomposeapp.uitle.theme.FirstComposeAppTheme
+import com.example.firstcomposeapp.uitle.theme.Purple700
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
 
   private val viewModel by viewModels<MainViewModel>()
+  private val currentScreen = mutableStateOf<BottomBarRow>(BottomBarRow.Home)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
-      val currentScreen = mutableStateOf<Screen>(Screen.Home)
-
       FirstComposeAppTheme {
-        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.primary) {
-          Scaffold(
-            topBar = { TopAppBar() },
-            bottomBar = { BottomBar(currentScreen = currentScreen) }
+        val navController = rememberNavController()
+        SetupNavGraph(navController = navController)
+      }
+    }
+  }
+
+  @Composable
+  fun SetupNavGraph(navController: NavHostController) {
+    NavHost(
+      navController = navController,
+      startDestination = Screens.Splash.route
+    ) {
+      composable(route = Screens.Splash.route) {
+        AnimatedSplashScreen(navController = navController)
+      }
+      composable(route = Screens.Home.route) {
+        HomeScreen()
+      }
+    }
+  }
+
+  @Composable
+  fun AnimatedSplashScreen(navController: NavHostController) {
+    var startAnimation by remember { mutableStateOf(false) }
+    val alphaAnim = animateFloatAsState(
+      targetValue = if (startAnimation) 1f else 0f,
+      animationSpec = tween(
+        durationMillis = 3000
+      )
+    )
+
+    LaunchedEffect(key1 = true) {
+      startAnimation = true
+      delay(4000)
+      navController.popBackStack()
+      navController.navigate(Screens.Home.route)
+    }
+    Splash(alpha = alphaAnim.value)
+  }
+
+  @Composable
+  fun Splash(alpha: Float) {
+    Box(
+      modifier = Modifier
+        .background(if (isSystemInDarkTheme()) Color.Black else Purple700)
+        .fillMaxSize(),
+      contentAlignment = Alignment.Center
+    ) {
+      Icon(
+        modifier = Modifier
+          .size(120.dp)
+          .alpha(alpha = alpha),
+        imageVector = Icons.Default.Email,
+        contentDescription = "Logo Icon",
+        tint = Color.White
+      )
+    }
+  }
+
+  @Composable
+  fun HomeScreen() {
+
+    Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.primary) {
+      Scaffold(
+        topBar = { TopAppBar() },
+        bottomBar = { BottomBar(currentBottomBarRow = currentScreen) }
+      ) {
+        Column(
+          Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+        ) {
+          Row(
+            modifier = Modifier
+              .padding(start = 16.dp, end = 16.dp, top = 15.dp, bottom = 8.dp)
+              .align(Alignment.CenterHorizontally)
           ) {
-            Column(
-              Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-            ) {
-              Row(
-                modifier = Modifier
-                  .padding(start = 16.dp, end = 16.dp, top = 15.dp, bottom = 8.dp)
-                  .align(Alignment.CenterHorizontally)
-              ) {
 
-                SetYourImage()
-                SetYourExperience()
+            SetYourImage()
+            SetYourExperience()
 
-              }
+          }
 
-              Divider(
-                thickness = 3.dp,
-                color = colorResource(id = R.color.culture),
-              )
+          Divider(
+            thickness = 3.dp,
+            color = colorResource(id = R.color.culture),
+          )
 
-              val loading: Boolean = viewModel.loading.value
-              val posts = viewModel.dummyPosts()
-              if (loading) {
-                AnimationShimmer()
-              } else {
-                LazyColumn(contentPadding = PaddingValues(bottom = 80.dp)) {
-                  itemsIndexed(
-                    items = posts
-                  ) { _, post ->
-                    PostCart(post = post, onClick = {})
-                  }
-
-                }
+          val loading: Boolean = viewModel.loading.value
+          val posts = viewModel.dummyPosts()
+          if (loading) {
+            AnimationShimmer()
+          } else {
+            LazyColumn(contentPadding = PaddingValues(bottom = 80.dp)) {
+              itemsIndexed(
+                items = posts
+              ) { _, post ->
+                PostCart(post = post, onClick = {})
               }
 
             }
-
           }
+
         }
+
       }
     }
   }
@@ -149,9 +218,9 @@ class MainActivity : ComponentActivity() {
   }
 
   @Composable
-  fun BottomBar(currentScreen: MutableState<Screen>) {
-    CustomBottomNavigation(screenCurrentId = currentScreen.value.id) {
-      currentScreen.value = it
+  fun BottomBar(currentBottomBarRow: MutableState<BottomBarRow>) {
+    CustomBottomNavigation(screenCurrentId = currentBottomBarRow.value.id) {
+      currentBottomBarRow.value = it
     }
   }
 
