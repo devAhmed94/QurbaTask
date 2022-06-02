@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
 
   private val viewModel by viewModels<MainViewModel>()
   private val currentScreen = mutableStateOf<BottomBarRow>(BottomBarRow.Home)
-
+//tests
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
